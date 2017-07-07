@@ -52,9 +52,11 @@ public class AutomaticLogin implements Filter {
 			}
 		}
 		try {
-			User user = service.loginInfo(username, password);
-			if(user!=null) {
-				session.setAttribute("user", user);
+			if(username!=null&&password!=null) {
+				User user = service.loginInfo(username, password);
+				if(user!=null) {
+					session.setAttribute("user", user);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
