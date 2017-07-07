@@ -50,7 +50,9 @@ public class UserServlet extends BaseServlet {
     	
 		return "/WEB-INF/jsp/login.jsp";
     }
-    
+    /**
+     *ÍË³öµÇÂ¼ 
+     */
     public String quit(HttpServletRequest request,HttpServletResponse response) throws IOException {
     	HttpSession session = request.getSession();
     	session.setAttribute("user", null);
