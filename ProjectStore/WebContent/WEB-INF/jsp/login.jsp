@@ -22,6 +22,7 @@
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
 	<script type="text/javascript">
 		$(function() {
+			/* 绑定验证码点击事件 */
 			$("#img").click(
 					function() {
 						$("#img").prop(
