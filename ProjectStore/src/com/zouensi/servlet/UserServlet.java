@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.zouensi.domain.User;
+import com.zouensi.factory.BeanFactory;
 import com.zouensi.service.UserService;
-import com.zouensi.service.impl.UserServiceImpl;
 import com.zouensi.threadhandler.EmailRunnable;
 import com.zouensi.threadhandler.EmaliThreadPool;
 import com.zouensi.utils.UUIDUtils;
@@ -29,7 +29,7 @@ import com.zouensi.utils.UUIDUtils;
 @WebServlet("/UserServlet")
 public class UserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    private UserService service = new UserServiceImpl();
+    private UserService service =  BeanFactory.getBean(UserService.class);
     public UserServlet() {
         super();
     }
@@ -62,7 +62,7 @@ public class UserServlet extends BaseServlet {
     	for (Cookie cookie : cookies) {
     		if("username".equals(cookie.getName())) {
     			cookie.setMaxAge(0);//age设置为0立即失效
-    			response.addCookie(cookie);
+    			response.addCookie(cookie);//设置成功后放入到response中
     		}
     		if("password".equals(cookie.getName())) {
     			cookie.setMaxAge(0);
@@ -101,10 +101,11 @@ public class UserServlet extends BaseServlet {
 			//获取激活code
 			String code =  UUIDUtils.getUUID()+ UUIDUtils.getUUID();
 			user.setCode(code);
+			//判断激活状态
 			boolean state = service.registerInfo(user);
 			if(state) {
 				request.setAttribute("msg", "亲,注册成功,请根据邮件进行激活");
-				// 异步发邮件
+				// 异步发邮件,提高业务的效率
 				String emailMsg="亲,激活邮件<a href=http://localhost:8081/ProjectStore/UserServlet?method=activate&code="
 						+user.getCode()+">点击激活</a>";
 				Runnable runnable = new EmailRunnable(user.getEmail(), emailMsg);

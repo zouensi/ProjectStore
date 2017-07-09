@@ -40,18 +40,19 @@ public class EncodeFilter implements Filter {
 		//由于提供的参数中没有提欧共的对应方法所以要强转
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse rep = (HttpServletResponse) response;
+		rep.setContentType("text/html;charset=utf-8");
 		//获取请求的方式
 		String method = req.getMethod();
 		if("POST".equals(method)) {
 			System.out.println("post");
 			req.setCharacterEncoding("utf-8");
-			chain.doFilter(req, response);
+			chain.doFilter(req, rep);
 		}else if("GET".equals(method)) {	
 			//用代理模式对req进行代理
 			HttpServletRequest newReq = (HttpServletRequest) Proxy.newProxyInstance(loader, req.getClass().getInterfaces(), new MyHandler(req));
-			chain.doFilter(newReq, response);
+			chain.doFilter(newReq, rep);
 		}else {
-			chain.doFilter(request, response);
+			chain.doFilter(request, rep);
 		}
 	
 	}

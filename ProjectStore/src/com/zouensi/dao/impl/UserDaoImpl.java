@@ -8,10 +8,10 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import com.zouensi.dao.UserDao;
 import com.zouensi.domain.User;
-import com.zouensi.utils.DataSourceUtils;
+import com.zouensi.utils.QueryRunnerUtils;
 
 public class UserDaoImpl implements UserDao{
-	private QueryRunner qr = new QueryRunner(DataSourceUtils.getDs());
+	private QueryRunner qr = QueryRunnerUtils.getQueryRunnerWithDs();
 	/**
 	 * 注册信息dao实现方法
 	 */

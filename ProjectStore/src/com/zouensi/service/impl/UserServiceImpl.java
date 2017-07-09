@@ -3,12 +3,12 @@ package com.zouensi.service.impl;
 import java.sql.SQLException;
 
 import com.zouensi.dao.UserDao;
-import com.zouensi.dao.impl.UserDaoImpl;
 import com.zouensi.domain.User;
+import com.zouensi.factory.BeanFactory;
 import com.zouensi.service.UserService;
 
 public class UserServiceImpl implements UserService {
-	private UserDao dao = new UserDaoImpl();
+	private UserDao dao = BeanFactory.getBean(UserDao.class);
 	/**
 	 * 注册service实现方法
 	 */

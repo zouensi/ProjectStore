@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="UserService" class="com.zouensi.service.impl.UserServiceImpl"/>
+	<bean id="UserDao" class="com.zouensi.dao.impl.UserDaoImpl"/>
+	
+	<bean id="CategoryService" class="com.zouensi.service.impl.CategoryServiceImpl"/>
+	<bean id="CategoryDao" class="com.zouensi.dao.impl.CategoryDaoImpl"/>
+	<bean id="CategoryCache" class="com.zouensi.cache.impl.CategoryCacheImpl"/>
+	
+	<bean id="ProductService" class="com.zouensi.service.impl.ProductServiceImpl"/>
+	<bean id="ProductDao" class="com.zouensi.dao.impl.ProductDaoImpl"/>
+</beans>

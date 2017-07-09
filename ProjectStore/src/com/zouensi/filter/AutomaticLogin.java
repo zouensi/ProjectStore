@@ -42,30 +42,37 @@ public class AutomaticLogin implements Filter {
 		}
 		String username = null;
 		String password = null;
+		//获取cookies
 		Cookie[] cookies = req.getCookies();
-		for (Cookie cookie : cookies) {
-			if("username".equals(cookie.getName())) {
-				username = cookie.getValue();
-			}
-			if("password".equals(cookie.getName())) {
-				password = cookie.getValue();
-			}
-		}
-		try {
-			if(username!=null&&password!=null) {
-				User user = service.loginInfo(username, password);
-				if(user!=null) {
-					session.setAttribute("user", user);
+		//cookies不为null
+		if(cookies!=null) {
+			for (Cookie cookie : cookies) {
+				if("username".equals(cookie.getName())) {
+					username = cookie.getValue();
+				}
+				if("password".equals(cookie.getName())) {
+					password = cookie.getValue();
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				if(username!=null&&password!=null) {
+					User user = service.loginInfo(username, password);
+					if(user!=null) {
+						//将User塞入到session中进行共享
+						session.setAttribute("user", user);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+		
 		chain.doFilter(request, response);
 		
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
+		
 	}
 
 }
