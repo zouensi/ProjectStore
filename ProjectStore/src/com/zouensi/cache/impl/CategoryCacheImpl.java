@@ -1,6 +1,7 @@
 package com.zouensi.cache.impl;
 
 
+
 import redis.clients.jedis.Jedis;
 
 import com.zouensi.cache.CategoryCache;
@@ -9,15 +10,16 @@ import com.zouensi.utils.RedisUtils;
 public class CategoryCacheImpl implements CategoryCache {
 	/**
 	 * 从缓存中获取类型
+	 * twr思想
 	 */
 	@Override
 	public String getCategory() {
 		String info = "";
-		try(Jedis jedis = RedisUtils.getJedis();) {
+		try(Jedis jedis = RedisUtils.getJedis()) {
 			info = jedis.get("categorys");
 		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		
 		return info;
 	}
 	

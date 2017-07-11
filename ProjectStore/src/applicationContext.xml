@@ -9,4 +9,8 @@
 	
 	<bean id="ProductService" class="com.zouensi.service.impl.ProductServiceImpl"/>
 	<bean id="ProductDao" class="com.zouensi.dao.impl.ProductDaoImpl"/>
+	
+	
+	<bean id="OrderService" class="com.zouensi.service.impl.OrderServiceImpl"/>
+	<bean id="OrderDao" class="com.zouensi.dao.impl.OrderDaoImpl"/>
 </beans>

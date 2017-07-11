@@ -3,7 +3,12 @@ package com.zouensi.domain;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * 
+ * @author zouensi
+ * @date 2017年7月9日
+ * 描述:分页信息对象
+ */
 public class PageBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;

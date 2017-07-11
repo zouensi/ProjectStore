@@ -12,6 +12,9 @@ import com.zouensi.service.ProductService;
 
 public class ProductServiceImpl implements ProductService {
 	private ProductDao dao = BeanFactory.getBean(ProductDao.class);
+	/**
+	 * 获取分页信息
+	 */
 	@Override
 	public String findProductLimit(String cid,int pageNumber) throws SQLException {
 		long totalCount = dao.getCount(cid);//总记录数

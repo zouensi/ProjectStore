@@ -3,7 +3,12 @@ package com.zouensi.utils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-
+/**
+ * 
+ * @author zouensi
+ * @date 2017年7月9日
+ * 描述:Redis工具类
+ */
 public class RedisUtils {
 	private RedisUtils() {
 		

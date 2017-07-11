@@ -104,7 +104,7 @@
 				if(msg.list!=0) {
 					if(pageNumber==msg.totalPage) {
 						$ul.append("<li class=disabled>"
-								+"<a href=# aria-label=Next  onclick=forword("+(pageNumber+1)+",'"+cid+"')>"
+								+"<a href=# aria-label=Next  )>"
 								+"<span aria-hidden='true'>&raquo;</span>"
 								+"</a>"
 								+"</li>");

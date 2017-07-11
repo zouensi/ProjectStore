@@ -16,10 +16,14 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryCache cache = BeanFactory.getBean( CategoryCache.class);
 	@Override
 	public String getCategory() throws SQLException {
+		//从缓存中获取信息
 		String info = cache.getCategory();
+		//如果缓存中没有就从数据库中获取
 		if(Utils.isEmpty(info)) {
 			List<Category> categorys = dao.getCategory();
 			info = JSON.toJSONString(categorys);
+			//添加到缓存中
+			cache.setCategory(info);
 		}
 		return info;
 	}

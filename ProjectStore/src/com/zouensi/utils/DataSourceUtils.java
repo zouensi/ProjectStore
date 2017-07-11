@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DataSourceUtils {
-	private static final ThreadLocal<Connection> local = new ThreadLocal();
+	private static final ThreadLocal<Connection> local = new ThreadLocal<Connection>();
 	private static ComboPooledDataSource ds = new ComboPooledDataSource();
 	/**
 	 * 获取连接池

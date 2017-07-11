@@ -24,12 +24,18 @@ public class UserDaoImpl implements UserDao{
 		int state = qr.update(sql, obj);
 		return state;
 	}
+	/**
+	 * 获取用户信息
+	 */
 	@Override
 	public User getUser(String code) throws SQLException {
 		String sql = "select * from user where code = ? limit 1";
 		User user = qr.query(sql, new BeanHandler<>(User.class),code);
 		return user;
 	}
+	/**
+	 * 更新用户信息
+	 */
 	@Override
 	public int updateUser(User user) throws SQLException {
 		String sql = "update user set username=?,password=?,name=?,email=?,birthday=?,sex=?,state=?";
@@ -37,6 +43,9 @@ public class UserDaoImpl implements UserDao{
 		int state = qr.update(sql, objs);
 		return state;
 	}
+	/**
+	 * 登录
+	 */
 	@Override
 	public User loginInfo(String username, String password) throws SQLException {
 		String sql = "select * from user where username = ? and password = ? limit 1";

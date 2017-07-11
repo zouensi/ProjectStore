@@ -1,7 +1,12 @@
 package com.zouensi.utils;
 
 import org.apache.commons.dbutils.QueryRunner;
-
+/**
+ * 
+ * @author zouensi
+ * @date 2017年7月9日
+ * 描述:QueryRunner工具类
+ */
 public class QueryRunnerUtils {
 	private QueryRunnerUtils() {
 		

@@ -14,6 +14,9 @@ import com.zouensi.utils.QueryRunnerUtils;
 
 public class ProductDaoImpl implements ProductDao {
 	private QueryRunner qr = QueryRunnerUtils.getQueryRunnerWithDs();
+	/**
+	 * 获取分页信息
+	 */
 	@Override
 	public List<Product> findProductLimit(String cid,int pageNumber,int pageCount) throws SQLException {
 		int size = (pageNumber-1)*pageCount;
@@ -21,6 +24,9 @@ public class ProductDaoImpl implements ProductDao {
 		List<Product> products = qr.query(sql, new BeanListHandler<Product>(Product.class),cid,size,pageCount);
 		return products;
 	}
+	/**
+	 * 获取商品数量
+	 */
 	@Override
 	public Long getCount(String cid) throws SQLException {
 		String sql = "select count(*) from product where cid = ?";
@@ -30,18 +36,28 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return count;
 	}
+	
+	/**
+	 * 获取商品信息
+	 */
 	@Override
 	public Product getProduct(String pid) throws SQLException {
 		String sql = "select * from product where pid =?";
 		Product product = qr.query(sql, new BeanHandler<Product>(Product.class),pid);
 		return product;
 	}
+	/**
+	 * 获取热门物品
+	 */
 	@Override
 	public List<Product> getHotProduct() throws SQLException {
 		String sql ="select * from product where is_hot = 0  order by pdate desc limit 0,9";
 		List<Product> products = qr.query(sql, new BeanListHandler<>(Product.class));
 		return products;
 	}
+	/**
+	 * 获取最新物品
+	 */
 	@Override
 	public List<Product> getNewProduct() throws SQLException {
 		String sql ="select * from product where pflag = 0 order by pdate limit 0,9";

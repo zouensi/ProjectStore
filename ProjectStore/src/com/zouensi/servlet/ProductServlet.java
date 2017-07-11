@@ -1,6 +1,5 @@
 package com.zouensi.servlet;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.annotation.WebServlet;
@@ -70,5 +69,4 @@ public class ProductServlet extends BaseServlet {
     	return "/WEB-INF/jsp/product_info.jsp";
     }
     
-
 }

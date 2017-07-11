@@ -15,7 +15,12 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
-
+/**
+ * 
+ * @author zouensi
+ * @date 2017年7月9日
+ * 描述:发送邮件工具类
+ */
 public class MailUtils {
 
 	public static void sendMail(String email, String emailMsg)

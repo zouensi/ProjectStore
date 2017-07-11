@@ -13,6 +13,9 @@ import com.zouensi.utils.QueryRunnerUtils;
 
 public class CategoryDaoImpl implements CategoryDao {
 	private QueryRunner qr = QueryRunnerUtils.getQueryRunnerWithDs();
+	/**
+	 * 获取分类信息
+	 */
 	@Override
 	public List<Category> getCategory() throws SQLException {
 		String sql = "select * from category";
