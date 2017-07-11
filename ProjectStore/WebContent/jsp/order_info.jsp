@@ -52,7 +52,7 @@
 									<tr class="active">
 										<td width="60" width="40%">
 											<input type="hidden" name="id" value="22">
-											<img src="${pageContext.request.contextPath}/image/dadonggua.jpg" width="70" height="60">
+											<img src="${pageContext.request.contextPath}/${items.product.pimage}" width="70" height="60">
 										</td>
 										<td width="30%">
 											<a target="_blank"> ${items.product.pname }</a>
@@ -83,26 +83,27 @@
 
 			<div>
 				<hr/>
-				<form class="form-horizontal" style="margin-top:5px;margin-left:150px;">
+				<form id="orderForm" class="form-horizontal" style="margin-top:5px;margin-left:150px;" action="${pageContext.request.contextPath}/OrderServlet">
+					<input type = "hidden" name="oid" value="${order.oid}"/>
+					<input type = "hidden" name="method" value="confirmOrder"/>
 					<div class="form-group">
-						<label for="username" class="col-sm-1 control-label">地址</label>
+						<label for="address" class="col-sm-1 control-label">地址</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" id="username" placeholder="请输入收货地址">
+							<input type="text" class="form-control" id="address" name="address" placeholder="请输入收货地址">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-1 control-label">收货人</label>
+						<label for="name" class="col-sm-1 control-label">收货人</label>
 						<div class="col-sm-5">
-							<input type="password" class="form-control" id="inputPassword3" placeholder="请输收货人">
+							<input type="text" class="form-control" id="name" name="name" placeholder="请输收货人">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="confirmpwd" class="col-sm-1 control-label">电话</label>
+						<label for="telephone" class="col-sm-1 control-label">电话</label>
 						<div class="col-sm-5">
-							<input type="password" class="form-control" id="confirmpwd" placeholder="请输入联系方式">
+							<input type="text" class="form-control" id="telephone" name="telephone" placeholder="请输入联系方式">
 						</div>
 					</div>
-				</form>
 
 				<hr/>
 
@@ -139,10 +140,9 @@
 						</a>
 					</p>
 					<hr/>
-
 				</div>
+				</form>
 			</div>
-
 		</div>
 
 	<%@ include file="footer.jsp" %>

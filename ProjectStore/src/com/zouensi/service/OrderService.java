@@ -22,5 +22,30 @@ public interface OrderService {
 	 * @throws SQLException 
 	 */
 	PageBean findOrders(User user, int pageNumber, int pageSize) throws SQLException;
+	/**
+	 * 根据oid查找订单
+	 * @param oid
+	 * @return
+	 * @throws SQLException
+	 */
+	Order findOrderById(String oid) throws SQLException;
+	
+	/**
+	 * 更新订单信息（确认订单）
+	 * @param i
+	 * @param address
+	 * @param name
+	 * @param telephone
+	 * @return
+	 * @throws SQLException 
+	 */
+	boolean updateOrder(String address, String name, String telephone,String oid) throws SQLException;
+
+	/**
+	 * 更新订单状态
+	 * @param state
+	 * @throws SQLException 
+	 */
+	boolean updateOrderState(int state,String oid) throws SQLException;
 	
 }

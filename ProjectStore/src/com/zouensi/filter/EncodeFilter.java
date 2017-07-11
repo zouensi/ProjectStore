@@ -44,7 +44,7 @@ public class EncodeFilter implements Filter {
 		//获取请求的方式
 		String method = req.getMethod();
 		if("POST".equals(method)) {
-			System.out.println("post");
+//			System.out.println("post");
 			req.setCharacterEncoding("utf-8");
 			chain.doFilter(req, rep);
 		}else if("GET".equals(method)) {	

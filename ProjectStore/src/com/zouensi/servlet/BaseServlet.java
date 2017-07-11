@@ -66,7 +66,7 @@ public class BaseServlet extends HttpServlet {
 	 */
 	public void showInfo(HttpServletRequest request, HttpServletResponse response,String msg) throws ServletException, IOException {
 		request.setAttribute("msg", msg);
-		request.getRequestDispatcher("/WEB-INF/jsp/info.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/info.jsp").forward(request, response);
 	}
 	
 	public void defaultMethod(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {

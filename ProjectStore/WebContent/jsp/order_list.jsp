@@ -47,7 +47,24 @@ body {
 						<c:forEach items="${pageBean.list}" var = "order">
 							<tbody>
 								<tr class="success">
-									<th colspan="5">订单编号:${order.oid }</th>
+									<th colspan="4">订单编号:${order.oid }</th>
+									<th >订单状态:
+										<c:if test="${order.state==0}">
+											<a href="${pageContext.request.contextPath}/OrderServlet?method=findOrderById&oid=${order.oid}">未付款</a>
+										</c:if>
+										<c:if test="${order.state==1}">
+											已付款未发货
+										</c:if>
+										<c:if test="${order.state==2}">
+											已发货未收货
+										</c:if>
+										<c:if test="${order.state==3}">
+											 已收货未评价
+										</c:if>
+										<c:if test="${order.state==4}">
+											已评价
+										</c:if>
+									</th>
 								</tr>
 								<tr class="warning">
 									<th>图片</th>
@@ -56,16 +73,18 @@ body {
 									<th>数量</th>
 									<th>小计</th>
 								</tr>
-								<tr class="active">
-									<td width="60" width="40%"><input type="hidden" name="id"
-										value="22"> <img
-										src="${pageContext.request.contextPath}/image/dadonggua.jpg"
-										width="70" height="60"></td>
-									<td width="30%"><a target="_blank"> 有机蔬菜 大冬瓜...</a></td>
-									<td width="20%">￥298.00</td>
-									<td width="10%">5</td>
-									<td width="15%"><span class="subtotal">￥596.00</span></td>
-								</tr>
+								<c:forEach items="${order.orderItems}" var="orderItem">
+									<tr class="active">
+										<td width="60" width="40%"><input type="hidden" name="id"
+											value="22"> <img
+											src="${pageContext.request.contextPath}/${orderItem.product.pimage}"
+											width="70" height="60"></td>
+										<td width="30%"><a target="_blank"> ${orderItem.product.pname}</a></td>
+										<td width="20%">￥${orderItem.product.shop_price}</td>
+										<td width="10%">${orderItem.count}</td>
+										<td width="15%"><span class="subtotal">￥${orderItem.subtotal}</span></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</c:forEach>
 					</c:if>
@@ -75,19 +94,30 @@ body {
 		</div>
 		<div style="text-align: center;">
 			<ul class="pagination">
-				<li class="disabled"><a href="#" aria-label="Previous"><span
+				<c:if test="${pageBean.pageSize==1}">
+					<li class="disabled"><a href="#" aria-label="Previous"><span
 						aria-hidden="true">&laquo;</span></a></li>
-				<li class="active"><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">6</a></li>
-				<li><a href="#">7</a></li>
-				<li><a href="#">8</a></li>
-				<li><a href="#">9</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</c:if>
+				<c:if test="${pageBean.pageSize!=1}">
+					<li><a href="${pageContext.request.contextPath}/OrderServlet?method=findOrders&pageSize=${pageBean.pageSize-1}" aria-label="Previous"><span
+						aria-hidden="true">&laquo;</span></a></li>
+				</c:if>
+				<c:forEach begin="1" end="${pageBean.totalPage}" step="1" varStatus="i">
+					<c:if test="${pageBean.pageSize==i.count }">
+						<li class="active"><a href="#">${i.count }</a></li>
+					</c:if>
+					<c:if test="${pageBean.pageSize!=i.count }">
+						<li ><a href="${pageContext.request.contextPath}/OrderServlet?method=findOrders&pageSize=${i.count }">${i.count }</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pageBean.pageSize==pageBean.totalPage}">
+					<li class="disabled"><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
+				</c:if>
+				<c:if test="${pageBean.pageSize!=pageBean.totalPage}">
+					<li><a href="${pageContext.request.contextPath}/OrderServlet?method=findOrders&pageSize=${pageBean.pageSize+1}" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</div>

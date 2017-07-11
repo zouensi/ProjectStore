@@ -1,6 +1,7 @@
 package com.zouensi.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable{
@@ -8,12 +9,12 @@ public class Order implements Serializable{
 	private String oid;//orderid 不用传
 	private String ordertime;//创建时间不用传
 	private double total;//总金额不用传
-	private Integer state;//状态 不用传
+	private Integer state;//状态 不用传  0: 未付款   1 :已付款未发货  2 已发货未收货  3 已收货未评价  4 已评价
 	private String address;//地址不用传
 	private String name;//用户名 自己查
 	private String telephone;//电话号
 	private User user;//用户
-	private List<OrderItem> orderItems;//订单项列表
+	private List<OrderItem> orderItems = new ArrayList<OrderItem>();//订单项列表
 	public String getOid() {
 		return oid;
 	}
@@ -68,4 +69,12 @@ public class Order implements Serializable{
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+	@Override
+	public String toString() {
+		return "Order [oid=" + oid + ", ordertime=" + ordertime + ", total="
+				+ total + ", state=" + state + ", address=" + address
+				+ ", name=" + name + ", telephone=" + telephone + ", user="
+				+ user + ", orderItems=" + orderItems + "]";
+	}
+	
 }
