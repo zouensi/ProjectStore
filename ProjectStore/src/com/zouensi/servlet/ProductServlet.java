@@ -26,7 +26,7 @@ public class ProductServlet extends BaseServlet {
      */
     public String productForword(HttpServletRequest request,HttpServletResponse response) {
     	request.setAttribute("cid", request.getParameter("cid"));
-    	return "/WEB-INF/jsp/product_list.jsp";
+    	return "/jsp/product_list.jsp";
     }
     /**
      * 获取分页数据
@@ -66,7 +66,7 @@ public class ProductServlet extends BaseServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return "/WEB-INF/jsp/product_info.jsp";
+    	return "/jsp/product_info.jsp";
     }
     
 }

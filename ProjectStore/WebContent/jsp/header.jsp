@@ -27,7 +27,7 @@
 					<c:if test="${not empty sessionScope.user }">
 						<li>欢迎您:${ sessionScope.user.name }</li>
 						<li><a
-							href="${pageContext.request.contextPath}/OrderServlet?method=orderList">订单</a></li>
+							href="${pageContext.request.contextPath}/OrderServlet?method=findOrders&pageSize=1">订单</a></li>
 						<li><a href="${pageContext.request.contextPath}/CartServlet?method=cart">购物车</a></li>
 						<li><a href="${pageContext.request.contextPath}/UserServlet?method=quit">退出</a></li>
 					</c:if>

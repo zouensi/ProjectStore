@@ -33,7 +33,7 @@ public class CartServlet extends BaseServlet {
     }
 
     public String cart(HttpServletRequest request,HttpServletResponse response) {
-    	return "/WEB-INF/jsp/cart.jsp";
+    	return "/jsp/cart.jsp";
     }
     /**
      * 向购物车添加商品
@@ -66,9 +66,11 @@ public class CartServlet extends BaseServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			showInfo(request, response, "亲,请求商品信息出错"+e.toString());
+			return null;
 		}
-    	
-    	return "/WEB-INF/jsp/cart.jsp";
+    	//通过响应将jessionid传回去（保存在客户端）
+		response.sendRedirect(request.getContextPath()+"/jsp/cart.jsp");
+    	return null;
     }
     
     /**
@@ -83,20 +85,29 @@ public class CartServlet extends BaseServlet {
     	String pid = request.getParameter("pid");
     	cart.remove(pid);
     	session.setAttribute("cart", cart);
-    	return "/WEB-INF/jsp/cart.jsp";
+    	return "/jsp/cart.jsp";
     }
     
+    /**
+     * 删除所有项
+     * @param request
+     * @param response
+     * @return
+     */
     public String removeAll(HttpServletRequest request,HttpServletResponse response) {
     	HttpSession session = request.getSession();
     	Cart cart = (Cart)session.getAttribute("cart");
     	cart.removeAll();
-    	return "/WEB-INF/jsp/cart.jsp";
+    	return "/jsp/cart.jsp";
     }
     
+    /**
+     * 默认方法
+     */
     @Override
     public void defaultMethod(HttpServletRequest request,
     		HttpServletResponse response) throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp").forward(request, response); 
+    	request.getRequestDispatcher("/jsp/cart.jsp").forward(request, response); 
     }
 
 }

@@ -1,6 +1,7 @@
 package com.zouensi.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import com.zouensi.domain.Cart;
 import com.zouensi.domain.CartItem;
 import com.zouensi.domain.Order;
 import com.zouensi.domain.OrderItem;
+import com.zouensi.domain.PageBean;
 import com.zouensi.domain.User;
 import com.zouensi.factory.BeanFactory;
 import com.zouensi.service.OrderService;
@@ -38,7 +40,7 @@ public class OrderServlet extends BaseServlet {
     }
 
     public String orderList(HttpServletRequest request,HttpServletResponse response) {
-    	return "/WEB-INF/jsp/order_list.jsp";
+    	return "/jsp/order_list.jsp";
     	
     }
     
@@ -55,7 +57,7 @@ public class OrderServlet extends BaseServlet {
     	User user = (User) session.getAttribute("user");
     	if(user==null) {
     		request.setAttribute("errorMsg", "请进行登录");
-    		return "/WEB-INF/jsp/cart.jsp";
+    		return "/jsp/cart.jsp";
     	}else {
     		//封装order
     		Cart cart = (Cart) session.getAttribute("cart");
@@ -94,7 +96,29 @@ public class OrderServlet extends BaseServlet {
     			showInfo(request, response, "亲,生成订单失败");
     			return null;
     		}
-    		return "/WEB-INF/jsp/order_info.jsp";
+    		return "/jsp/order_info.jsp";
     	}
+    }
+    
+    public String findOrders(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    	//获取用户信息
+    	HttpSession session = request.getSession();
+    	User user = (User)session.getAttribute("user");
+    	if(user==null) {
+    		showInfo(request, response, "亲,请先登录在进行订单查询操作!");
+			return null;
+    	}
+    	int pageNumber = 4;
+    	int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+    	try {
+			PageBean pageBean = service.findOrders(user,pageNumber,pageSize);
+			System.out.println(pageBean.toString());
+			request.setAttribute("pageBean", pageBean);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			showInfo(request, response, "亲,查询失败!");
+			return null;
+		}
+    	return "/jsp/order_list.jsp";
     }
 }

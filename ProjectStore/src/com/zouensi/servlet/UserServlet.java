@@ -39,7 +39,7 @@ public class UserServlet extends BaseServlet {
      */
     public String register(HttpServletRequest request,HttpServletResponse response) {
     	
-		return "/WEB-INF/jsp/register.jsp";
+		return "/jsp/register.jsp";
     }
     
     /**
@@ -48,7 +48,7 @@ public class UserServlet extends BaseServlet {
      */
     public String login(HttpServletRequest request,HttpServletResponse response) {
     	
-		return "/WEB-INF/jsp/login.jsp";
+		return "/jsp/login.jsp";
     }
     /**
      *退出登录 
@@ -88,7 +88,7 @@ public class UserServlet extends BaseServlet {
     	if(userYum==null||sessionYum==null||sessionYum.equalsIgnoreCase(userYum)) {
     		request.setAttribute("msg","验证码输入错误");
     		session.setAttribute("yum", "");//让用户必重新输入验证码
-    		return "/WEB-INF/jsp/register.jsp?method=registerInfo";
+    		return "/jsp/register.jsp?method=registerInfo";
     	}
     	User user = new User();
     	try {
@@ -118,7 +118,7 @@ public class UserServlet extends BaseServlet {
 		}
     	session.setAttribute("yum", "");
     	//成功跳转到info页面提示
-		return "/WEB-INF/jsp/info.jsp";
+		return "/jsp/info.jsp";
     }
     
     public String activate(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
@@ -134,7 +134,7 @@ public class UserServlet extends BaseServlet {
 				boolean state = service.updateUser(user);
 				if(state) {
 					request.setAttribute("msg", "亲,激活成功,请进行登录");
-					return "/WEB-INF/jsp/login.jsp";
+					return "/jsp/login.jsp";
 				}else {
 					request.setAttribute("msg", "亲,激活失败!");
 				}
@@ -143,7 +143,7 @@ public class UserServlet extends BaseServlet {
 			showInfo(request, response, "亲,激活失败!");
 			e.printStackTrace();
 		}
-    	return "/WEB-INF/jsp/info.jsp";
+    	return "/jsp/info.jsp";
     }
     /**
      * 用户登录
@@ -163,7 +163,7 @@ public class UserServlet extends BaseServlet {
     	session.setAttribute("yzm", "");//让用户必重新输入验证码
     	if(userYum==null||sessionYum==null||!sessionYum.equalsIgnoreCase(userYum)) {
     		request.setAttribute("errorMsg","验证码输入错误");
-    		return "/WEB-INF/jsp/login.jsp?method=loginInfo";
+    		return "/jsp/login.jsp?method=loginInfo";
     	}
     	String zdLogin = request.getParameter("zdLogin");
     	String username = request.getParameter("username");
@@ -174,7 +174,7 @@ public class UserServlet extends BaseServlet {
 				if(user.getState()==null||user.getState()==0) {
 					//还没有激活
 					request.setAttribute("errorMsg", "亲,还有激活,请先激活账号!");
-					url = "/WEB-INF/jsp/login.jsp?method=loginInfo";
+					url = "/jsp/login.jsp?method=loginInfo";
 				}else {
 					if("1".equals(zdLogin)) {
 						Cookie cookieUsername = new Cookie("username",user.getUsername());
@@ -195,7 +195,7 @@ public class UserServlet extends BaseServlet {
 			}else {
 				//用户不存在
 				request.setAttribute("errorMsg", "亲,用户名或者密码不正确!");
-				url = "/WEB-INF/jsp/login.jsp?method=loginInfo";
+				url = "/jsp/login.jsp?method=loginInfo";
 			}
 		} catch (SQLException e) {
 			showInfo(request, response, "亲,登录失败,请重新登录");

@@ -41,7 +41,7 @@ public class IndexServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
