@@ -150,6 +150,14 @@ public class OrderServlet extends BaseServlet {
     	return "/jsp/order_info.jsp";
     }
     
+    /**
+     * »∑»œ∂©µ•
+     * @param request
+     * @param response
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     public String confirmOrder(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     	String oid = request.getParameter("oid");
     	String address = request.getParameter("address");

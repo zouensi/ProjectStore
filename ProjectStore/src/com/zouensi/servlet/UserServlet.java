@@ -181,7 +181,7 @@ public class UserServlet extends BaseServlet {
 						cookieUsername.setMaxAge(60*60*24*7);
 						Cookie cookiePassword = new Cookie("password",user.getPassword());
 						cookiePassword.setMaxAge(60*60*24*7);
-						//Ìì¼Ócookie
+						//Ìí¼Ócookie
 						response.addCookie(cookieUsername);
 						response.addCookie(cookiePassword);
 					}
